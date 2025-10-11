@@ -159,27 +159,14 @@ body, html{
 
 /* Shimmer - Effect */
 
-.shimmer-container{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  padding: 20px;
-}
-
 .shimmer-card {
-  width: 220px; /* same as .card width */
-  height: 320px; /* match approximate height of actual card including image + text + button */
+  width: 230px; /* same as .card width */
+  height: 300px; /* match approximate height of actual card including image + text + button */
   border-radius: 12px;
-  background: linear-gradient(
-    to right,
-    #eeeeee 8%,
-    #dddddd 18%,
-    #eeeeee 33%
-  );
+  background: lightgray;
   background-size: 800px 104px;
   animation: shimmer 1.2s infinite linear;
-  margin: 10px; /* same as card margin */
+  margin: 20px; /* same as card margin */
 }
 
 

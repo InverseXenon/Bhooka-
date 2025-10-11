@@ -1,4 +1,13 @@
+import { useState } from "react";
+
+const loggedInUser =() =>{
+    // API call to check Authentication
+    return true;
+}
+
 function Navbar(){
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     return(
         <>
             <div className="navbar">
@@ -10,6 +19,11 @@ function Navbar(){
                     <button>Contact Us</button>
                     <button>Cart</button>
                 </div>
+                {
+                    (isLoggedIn)?<button onClick={()=>setIsLoggedIn(false)}>Logout</button>:<button onClick={()=>setIsLoggedIn(true)}>Login</button>
+                }
+                
+                
             </div>
             
         </>
