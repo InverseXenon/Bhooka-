@@ -2,12 +2,11 @@ import restaurantData from "../mockData/mockdata";
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 function filterData(query, hotels){
     return hotels.filter((hotels)=>
             hotels?.name?.toLowerCase()?.includes(query?.toLowerCase())
-
-
     )
 }
 
@@ -20,41 +19,30 @@ function Body(){
         fetchData();
     },[]);
 
-    // Conditional Rendering!
-    // If restaurant is empty => Shimmer UI
-    // If restaurant has data => Actual Data UI
-
     async function fetchData(){
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
         const json = await data.json();
         
-
         const restaurants = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
 
-            const formatted = restaurants.map((res)=>({
+        const formatted = restaurants.map((res)=>({
+            id: res.info.id,
             name: res.info.name,
-            image: "https://media-assets.swiggy.com/" + res.info.cloudinaryImageId,
+            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + res.info.cloudinaryImageId,
             location: res.info.areaName,
             description: res.info.cuisines?.join(", "),
             rating: res.info.avgRating,
-            }));
+        }));
 
-            setFilteredHotels(formatted);
-            setAllHotels(formatted);
-        
+        setFilteredHotels(formatted);
+        setAllHotels(formatted);
     }
-
 
     if(!allHotels) return null;
 
-    // if(filteredHotels.length === 0 )
-    //     return <h1>NO HOTEL FOUND</h1>
-
     return filteredHotels?.length === 0 ?( <Shimmer />):(
         <>
-        
             <div className="search">
-                
                 <input type="text"
                     className="search-input" 
                     placeholder="Search Hotel/Food" 
@@ -68,23 +56,21 @@ function Body(){
                     setFilteredHotels(data);
                     }}
                 ><img src="https://static.thenounproject.com/png/4009566-200.png" alt="Search" className="search-icon" /></button>
-                
             </div>
             <div className="restaurant-list">
-                
                 {
-                filteredHotels.map((res,index)=>(
-                    <RestaurantCard 
-                        key={index}
-                        image={res.image}
-                        name={res.name}
-                        location={res.location}
-                        description={res.description}
-                        rating={res.rating}
-                    />
+                filteredHotels.map((res)=>(
+                    <Link to={`/restaurant/${res.id}`} key={res.id} style={{textDecoration: 'none', color: 'inherit'}}>
+                        <RestaurantCard 
+                            image={res.image}
+                            name={res.name}
+                            location={res.location}
+                            description={res.description}
+                            rating={res.rating}
+                        />
+                    </Link>
                 ))}
             </div>
-            
         </>
     )
 }

@@ -115,7 +115,7 @@ body, html{
 }
 
 .card-img{
-  width: 120px;
+  width: 200px;
   margin: auto;
   display: block;
   
@@ -177,4 +177,51 @@ body, html{
   100% {
     background-position: 468px 0;
   }
+}
+
+
+.error-page{
+  display:list-item;
+  justify-content:center;
+  align-items: center;
+
+}
+
+.message{
+  display: inline-flexbox;
+  text-align: center;
+}
+
+.error-page img{
+  display: flex;
+  position: fixed;
+  left: 25%;
+}
+
+.go-back-btn{
+  position: fixed;
+  left: 45%;
+}
+
+.go-back-btn button{
+  background-color: #0A546D;
+  border-radius: 12px;
+  color: aliceblue;
+}
+
+.go-back-btn button:hover{
+  background-color: darkblue;
+}
+
+
+/* Hotel Menu */
+
+.menu{
+  display:grid;
+  justify-content: center;
+  align-items: center;
+
+}
+.hotel-name{
+  display: flex;
 }

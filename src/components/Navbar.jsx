@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const loggedInUser =() =>{
     // API call to check Authentication
@@ -14,9 +15,10 @@ function Navbar(){
                 <img src="https://m.media-amazon.com/images/I/51gmgLecQsL.jpg" alt="Bhooka" className="logo" />
                 <h1>Always BHOOKA!</h1>
                 <div className="nav-btn">
-                    <button>Home</button>
-                    <button>About Us</button>
-                    <button>Contact Us</button>
+                    <Link to="/"><button>Home</button></Link>                    
+                    <Link to="/about"><button>About Us</button></Link>
+                    <Link to="/contact"><button>Contact Us</button></Link>
+                    
                     <button>Cart</button>
                 </div>
                 {

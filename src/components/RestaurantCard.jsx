@@ -7,7 +7,6 @@ function RestaurantCard({name, location, description, image, rating}){
                 <h3>📍{location}</h3>
                 <p>{description}</p>
                 <h3>{rating} stars</h3>
-                <button className="card-btn">BUY!</button>
             </div>
         </>
     )
