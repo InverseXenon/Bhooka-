@@ -1,14 +1,13 @@
-const About = ()=>{
-    return(
-        <> 
-            <div>
-                <h1>About Us Page</h1>
-                <p>
-                    {" "}
-                    I am Piyush, Learning Namaste React Course from Aditya Saini!</p>
-            </div>
-        </>
-    )
+import React from "react";
+class About extends React.Component{
+    render() {
+        return(
+            <>
+                <h1>About Us</h1>
+                <p>Hello I am Piyush, Learning From Akshay Saini</p>
+            </>
+        )
+    }
 }
 
 export default About;

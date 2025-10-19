@@ -1,33 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import mockMenuData from "../mockData/menuMockData";
+import useRestaurant from "../utils/useRestaurants";
 
 const RestaurantMenu = () => {
     const {id} = useParams();
-    const [restaurantName, setRestaurantName] = useState("");
+    const restaurant = useRestaurant(id);
 
-    useEffect(()=>{
-        getRestaurantInfo();
-    },[]);
-
-    async function getRestaurantInfo() {
-        const data = await fetch(
-            `https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
-        );
-        const json = await data.json();
-        
-        const restaurants = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
-        
-        const restaurant = restaurants.find(res => res.info.id === id);
-        
-        if(restaurant) {
-            setRestaurantName(restaurant.info.name);
-        }
-    }
+    
 
     return (
         <div className="menu">
-            <h1 className="hotel-name">{restaurantName || "Loading..."}</h1>
+            <h1 className="hotel-name">{restaurant || "Loading..."}</h1>
             <h3>Restaurant ID: {id}</h3>
             
             

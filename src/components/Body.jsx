@@ -3,6 +3,8 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import {IMG_CDN_URL,RES_LIST_URL} from "../utils/constants";
+import useOnline from "../utils/useOnline";
 
 function filterData(query, hotels){
     return hotels.filter((hotels)=>
@@ -20,7 +22,7 @@ function Body(){
     },[]);
 
     async function fetchData(){
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+        const data = await fetch(RES_LIST_URL)
         const json = await data.json();
         
         const restaurants = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
@@ -28,7 +30,7 @@ function Body(){
         const formatted = restaurants.map((res)=>({
             id: res.info.id,
             name: res.info.name,
-            image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + res.info.cloudinaryImageId,
+            image: IMG_CDN_URL + res.info.cloudinaryImageId,
             location: res.info.areaName,
             description: res.info.cuisines?.join(", "),
             rating: res.info.avgRating,
@@ -36,6 +38,12 @@ function Body(){
 
         setFilteredHotels(formatted);
         setAllHotels(formatted);
+    }
+
+    const isOnline = useOnline();
+
+    if (!isOnline){
+        return <h1 className="warning">⚠️Check your Internet Connection⚠️</h1>
     }
 
     if(!allHotels) return null;

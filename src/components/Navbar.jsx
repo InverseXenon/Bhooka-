@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 const loggedInUser =() =>{
     // API call to check Authentication
@@ -8,19 +9,25 @@ const loggedInUser =() =>{
 
 function Navbar(){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const isOnline = useOnline();
 
     return(
         <>
             <div className="navbar">
+                
                 <img src="https://m.media-amazon.com/images/I/51gmgLecQsL.jpg" alt="Bhooka" className="logo" />
-                <h1>Always BHOOKA!</h1>
+                <h1>{isOnline? "✅": "⚠️"}Always BHOOKA!</h1>
+                
                 <div className="nav-btn">
                     <Link to="/"><button>Home</button></Link>                    
                     <Link to="/about"><button>About Us</button></Link>
                     <Link to="/contact"><button>Contact Us</button></Link>
+                    <Link to="/instamangao"><button>InstaMangao</button></Link>
                     
                     <button>Cart</button>
+                    
                 </div>
+                
                 {
                     (isLoggedIn)?<button onClick={()=>setIsLoggedIn(false)}>Logout</button>:<button onClick={()=>setIsLoggedIn(true)}>Login</button>
                 }
