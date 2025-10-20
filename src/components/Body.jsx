@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import {IMG_CDN_URL,RES_LIST_URL} from "../utils/constants";
 import useOnline from "../utils/useOnline";
 
+
 function filterData(query, hotels){
     return hotels.filter((hotels)=>
             hotels?.name?.toLowerCase()?.includes(query?.toLowerCase())
@@ -50,35 +51,38 @@ function Body(){
 
     return filteredHotels?.length === 0 ?( <Shimmer />):(
         <>
-            <div className="search">
+            <div className="search flex items-center max-w-md mx-auto p-3 bg-blue-50 rounded-lg shadow-md my-5">
                 <input type="text"
-                    className="search-input" 
+                    className="flex-grow px-4 py-2 rounded-l-lg border text-white border-blue-200 focus:outline-none focus:ring-1 focus:bg-blue-500" 
                     placeholder="Search Hotel/Food" 
                     value={query}
                     onChange={(e) =>{
                     setQuery(e.target.value);
                     }}/>
-                <button className="search-btn" 
+                <button className=" h-10 px-4 py-2 bg-blue-400 hover:bg-blue-500 text-white rounded-r-lg flex items-center justify-center transition" 
                     onClick={()=>{
                     const data = filterData(query,allHotels);
                     setFilteredHotels(data);
                     }}
-                ><img src="https://static.thenounproject.com/png/4009566-200.png" alt="Search" className="search-icon" /></button>
+                ><img src="https://static.thenounproject.com/png/4009566-200.png" alt="Search" className="h-5 w-5" /></button>
             </div>
-            <div className="restaurant-list">
-                {
-                filteredHotels.map((res)=>(
-                    <Link to={`/restaurant/${res.id}`} key={res.id} style={{textDecoration: 'none', color: 'inherit'}}>
-                        <RestaurantCard 
-                            image={res.image}
-                            name={res.name}
-                            location={res.location}
-                            description={res.description}
-                            rating={res.rating}
-                        />
-                    </Link>
-                ))}
-            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+            {filteredHotels.map((res) => (
+                <Link
+                    to={`/restaurant/${res.id}`}
+                    key={res.id}
+                    className="text-inherit no-underline"
+                >
+                    <RestaurantCard
+                        image={res.image}
+                        name={res.name}
+                        location={res.location}
+                        description={res.description}
+                        rating={res.rating}
+                    />
+                </Link>
+            ))}
+        </div>
         </>
     )
 }
