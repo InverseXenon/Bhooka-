@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import userContext from "../utils/userContext";
+
 function RestaurantCard({ name, location, description, image, rating }) {
+    const {user} = useContext(userContext);
     return (
         <div className="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition duration-300 m-4">
             
@@ -11,6 +15,7 @@ function RestaurantCard({ name, location, description, image, rating }) {
                 <h3 className="text-sm text-gray-500 mb-2 flex items-center gap-1">📍 {location}</h3>
                 <p className="text-gray-700 text-sm mb-3 line-clamp-3">{description}</p>
                 <h3 className="text-yellow-500 font-semibold">{rating} ⭐</h3>
+                <span className="font-bold ">{user.name}</span>
             </div>
         </div>
     );

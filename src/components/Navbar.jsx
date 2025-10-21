@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import { useContext } from "react";
+import userContext from "../utils/userContext";
 
 const loggedInUser =() =>{
     // API call to check Authentication
@@ -10,6 +12,7 @@ const loggedInUser =() =>{
 function Navbar(){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const isOnline = useOnline();
+    const {user} = useContext(userContext)
 
     return(
         <>
@@ -26,6 +29,11 @@ function Navbar(){
                     <button className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 transition">Cart</button>
                     
                 </div>
+
+                <h1 className="p-10 font-bold "> 
+                    {user.name}
+                </h1>
+                
                 
                 {
                     (isLoggedIn)?<button className="px-4 py-2 mx-1 bg-blue-700 text-white rounded hover:bg-blue-800 transition" onClick={()=>setIsLoggedIn(false)}>Logout</button>:<button className="px-4 py-2 mx-1 bg-blue-700 text-white rounded hover:bg-blue-800 transition" onClick={()=>setIsLoggedIn(true)}>Login</button>

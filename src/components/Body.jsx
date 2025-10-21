@@ -1,10 +1,11 @@
 import restaurantData from "../mockData/mockdata";
 import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import {IMG_CDN_URL,RES_LIST_URL} from "../utils/constants";
 import useOnline from "../utils/useOnline";
+import userContext from "../utils/userContext";
 
 
 function filterData(query, hotels){
@@ -17,6 +18,7 @@ function Body(){
     const [filteredHotels, setFilteredHotels] = useState([]);
     const [allHotels,setAllHotels] = useState(restaurantData);
     const [query, setQuery] = useState("");
+    const {user,setUser} = useContext(userContext);
 
     useEffect(()=>{
         fetchData();
@@ -65,6 +67,7 @@ function Body(){
                     setFilteredHotels(data);
                     }}
                 ><img src="https://static.thenounproject.com/png/4009566-200.png" alt="Search" className="h-5 w-5" /></button>
+                
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
             {filteredHotels.map((res) => (
