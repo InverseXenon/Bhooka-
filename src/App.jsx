@@ -7,6 +7,8 @@ import About from './components/About';
 import Home from './pages/Home';
 import { useState } from 'react';
 import userContext from './utils/userContext';
+import {Provider} from "react-redux";
+import store from './utils/store';
 
 
 function App() {
@@ -16,15 +18,17 @@ function App() {
   })
 
   return (
-    <>
-       <userContext.Provider value={{
-        user:user,
-        setUser:setUser
-        }}> 
-          <Navbar />
-          <Outlet />
-          <Footer />
-        </userContext.Provider>
+    <>        
+        <Provider store={store}>    
+          <userContext.Provider value={{
+            user:user,
+            setUser:setUser
+            }}> 
+            <Navbar />
+            <Outlet />
+            <Footer />
+          </userContext.Provider>
+        </Provider>
     </>
   )
 }

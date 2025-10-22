@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import { useContext } from "react";
 import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
+
 
 const loggedInUser =() =>{
     // API call to check Authentication
@@ -12,7 +14,9 @@ const loggedInUser =() =>{
 function Navbar(){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const isOnline = useOnline();
-    const {user} = useContext(userContext)
+    const {user} = useContext(userContext);
+    const cartItems = useSelector(store => store.cart.items);
+    console.log(cartItems);
 
     return(
         <>
@@ -26,8 +30,9 @@ function Navbar(){
                     <Link to="/about"><button className="px-4 py-2 mx-1 bg-blue-700 text-white rounded hover:bg-blue-800 transition">About Us</button></Link>
                     <Link to="/contact"><button className="px-4 py-2 mx-1 bg-blue-700 text-white rounded hover:bg-blue-800 transition">Contact Us</button></Link>
                     <Link to="/instamangao"><button className="px-4 py-2 mx-1 bg-blue-700 text-white rounded hover:bg-blue-800 transition">InstaMangao</button></Link>
-                    <button className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 transition">Cart</button>
-                    
+                    <Link to="/cart">
+                    <button className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 transition">Cart- {cartItems.length} Items</button>
+                    </Link>
                 </div>
 
                 <h1 className="p-10 font-bold "> 

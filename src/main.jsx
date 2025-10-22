@@ -11,6 +11,7 @@ import Profile from "./pages/ClassProfile";
 import AboutUs from "./pages/AboutUs";
 import Profile1 from "./pages/Profile";
 import Shimmer from "./components/Shimmer";
+import Cart from "./pages/Cart";
 
 const InstaMangao = lazy(() =>
   import("./pages/InstaMangao")
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       {path:"/contact", element: <Contact/>} ,
       { path:"/restaurant/:id", element:<RestaurantMenu />},
       {path:"/login",element:<Login/>},
+      {path:"/cart",element:<Cart/>},
       {path:"/instamangao",element:
       <Suspense fallback={<Shimmer/>}>
           <InstaMangao/>
