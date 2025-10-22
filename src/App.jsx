@@ -13,8 +13,8 @@ import store from './utils/store';
 
 function App() {
   const [user,setUser] = useState({
-    name:"John Doe",
-    email:"johndoe123@gmail.com"
+    name:"Piyush Patil",
+    email:"piyushpatil1741@gmail.com"
   })
 
   return (

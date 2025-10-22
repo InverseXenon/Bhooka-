@@ -3,8 +3,10 @@ class About extends React.Component{
     render() {
         return(
             <>
-                <h1>About Us</h1>
-                <p>Hello I am Piyush, Learning From Akshay Saini</p>
+            <div>
+                <p className="text-bold text-xl flex justify-center">Hello I am Piyush, Learning From Akshay Saini</p>
+
+            </div>
             </>
         )
     }
